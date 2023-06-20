@@ -1,0 +1,109 @@
+﻿@model IEnumerable<UserApp.Models.User>
+
+
+@{
+    ViewBag.Title = "RestoreUs";
+}
+
+
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+<table id="myTable" class="table table-hover table-bordered table-striped bg-info ">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayName("Skills")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => user.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Gender)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => user.Status)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => user.Phone)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => user.Address)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => user.Email)
+            </td>
+            <td>
+                @foreach (var skill in user.Skills)
+                {
+                    @skill.SkillName<br />
+                }
+            </td>
+            <td>
+                @Html.ActionLink("RECOVER", "Recover", new { id = user.UserID }, new { @style = "color:black" }) |
+                @Html.ActionLink("DROP", "Delete", new { id = user.UserID }, new { @style = "color:red" })
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

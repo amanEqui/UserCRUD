@@ -1,0 +1,35 @@
+﻿@model UserApp.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete User</h2>
+
+<div class="form-horizontal">
+    <h4>Are you sure you want to delete this user?</h4>
+    <hr />
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.UserName)</dt>
+                <dd>@Html.DisplayFor(model => model.UserName)</dd>
+
+            </dl>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+</div>

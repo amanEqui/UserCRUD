@@ -1,0 +1,55 @@
+﻿@model UserApp.Models.User
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<h2>User Details</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <td><strong>Username:</strong></td>
+        <td>@Model.UserName</td>
+    </tr>
+    <tr>
+        <td><strong>UserPass:</strong></td>
+        <td>@Model.UserPass</td>
+    </tr>
+    <tr>
+        <td><strong>Date of Birth:</strong></td>
+        <td>@Model.DOB</td>
+    </tr>
+    <tr>
+        <td><strong>Gender:</strong></td>
+        <td>@Model.Gender</td>
+    </tr>
+    <tr>
+        <td><strong>Status:</strong></td>
+        <td>@Model.Status</td>
+    </tr>
+    <tr>
+        <td><strong>Phone:</strong></td>
+        <td>@Model.Phone</td>
+    </tr>
+    <tr>
+        <td><strong>Address:</strong></td>
+        <td>@Model.Address</td>
+    </tr>
+    <tr>
+        <td><strong>Email:</strong></td>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <td><strong>Skills:</strong></td>
+        <td>
+            @foreach (var skill in Model.Skills)
+            {
+                @skill.SkillName<br />
+            }
+        </td>
+    </tr>
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
